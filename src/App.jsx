@@ -25,8 +25,7 @@ export default function Home() {
             </ul>
         </div>
         <div className='right container'>
-
-            
+                       
         </div>
       </div>
     </div>

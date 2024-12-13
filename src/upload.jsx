@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-
+import { Link } from 'react-router';
 export default function Upload() {
   const [data, setData] = useState({
     category: "",
@@ -35,6 +35,11 @@ export default function Upload() {
       <div className="header-container">
         <div className='image-container'>
           <img src="" alt="Logo" />
+        </div>
+        <div className="btn-container">
+          <Link to="/test-2">
+            <button className="upload-btn">கவிதை</button>
+          </Link>
         </div>
       </div>
       <div className="upload-container">

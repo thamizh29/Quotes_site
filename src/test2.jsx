@@ -9,22 +9,7 @@ export default function Test() {
 
   // Fetch data for the selected item
   const handleFetchData = async (type) => {
-    let url = "";
-    switch (type) {
-      case "கவிதை":
-        url = "http://192.168.1.18:5000/api/quotes";
-        break;
-      case "என்னவளுக்காக (💖💖)":
-        url = "https://quotes-app-84u8.onrender.com/api/get_quote/birthday";
-        break;
-      case "காதல்":
-        url = "https://quotes-app-84u8.onrender.com/api/get_quote/birthday";
-        break;
-      // Add additional cases for other menu items if needed
-      default:
-        return;
-    }
-
+    let url = `https://quotes-app-84u8.onrender.com/api/get_quote/${type}`;
     try {
       const result = await axios.get(url);
       setData(result.data);
@@ -65,12 +50,34 @@ export default function Test() {
     }
   };
 
+  const [screenWidth, setScreenWidth] = useState(window.innerWidth);
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+
+  useEffect(() => {
+    const handleResize = () => {
+      const width = window.innerWidth;
+      setScreenWidth(width);
+      setIsMobile(width < 768); // Update isMobile based on screen width
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    // Cleanup listener on unmount
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
+
   return (
     <div>
       <div className="header-container">
-        <div className="image-container">
+        {isMobile ? (
+        <button className="menu-toggle" onClick={toggleMenu}>
+          ☰ 
+        </button>) :
+        (<div className="image-container">
           <img src="" alt="சின்னம்" />
-        </div>
+        </div>)}
         <div className="btn-container">
           <Link to="/upload">
             <button className="upload-btn">பதிவேற்றம்</button>
@@ -78,7 +85,9 @@ export default function Test() {
         </div>
       </div>
       <div className="main-container">
-        <div className="container-left">
+      {isMobile ?  null : (
+        <div className={`container-left ${isMenuOpen ? "open" : ""}`}>
+          
           <ul>
             {[
               "கவிதை",
@@ -95,6 +104,7 @@ export default function Test() {
             ))}
           </ul>
         </div>
+        ) }
         <div className="container-right">{renderComponent()}</div>
       </div>
     </div>
