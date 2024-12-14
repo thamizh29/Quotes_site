@@ -3,16 +3,25 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import "./styles.scss";
 
-export default function Test() {
+export default function QuotesApp() {
   const [selectedItem, setSelectedItem] = useState("கவிதை");
   const [data, setData] = useState([]);
 
   // Fetch data for the selected item
   const handleFetchData = async (type) => {
+    
+    const all = `https://quotes-app-84u8.onrender.com/api/quotes`;
     let url = `https://quotes-app-84u8.onrender.com/api/get_quote/${type}`;
     try {
-      const result = await axios.get(url);
+      if(type === "கவிதை")
+      {
+      const result = await axios.get(all);
       setData(result.data);
+      }
+      else{
+        const result = await axios.get(url);
+      setData(result.data);
+      }
     } catch (error) {
       console.error("Failed to fetch data:", error);
     }
@@ -67,6 +76,11 @@ export default function Test() {
   }, []);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
+  useEffect(() => {
+    document.body.addEventListener('click', () => {
+      console.log('Click!');
+    });
+  }, []);
 
   return (
     <div>

@@ -1,0 +1,112 @@
+$primary-color: #FFD6D4;
+$secondary-color: #D0F1FA;
+$border-color: #ddd;
+$text-color: #333;
+$label-color: #555;
+$hover-color: #3a7bd5;
+
+.login {
+  font-family: 'Arial', sans-serif;
+  background: linear-gradient(to right, $secondary-color, $primary-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh; // Full screen height
+  margin: 0;
+  padding: 0;
+
+  .login-container {
+    background-color: white; // White container
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center; // Ensure elements are vertically centered
+    min-height: 60vh; // Ensure container has a minimum height
+
+    h2 {
+      margin-bottom: 20px;
+      font-size: 28px;
+      color: $text-color;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+      text-align: left;
+
+      label {
+        display: block;
+        font-size: 14px;
+        color: $label-color;
+        margin-bottom: 8px;
+      }
+
+      input {
+        width: 100%;
+        padding: 12px;
+        border: 2px solid $border-color;
+        border-radius: 5px;
+        font-size: 16px;
+        color: $text-color;
+        box-sizing: border-box;
+        transition: border-color 0.3s ease;
+
+        &:focus {
+          border-color: $primary-color;
+          outline: none;
+        }
+      }
+    }
+
+    .btn {
+      width: 100%;
+      padding: 12px;
+      background-color: $primary-color;
+      color: white;
+      font-size: 16px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+
+      &:hover {
+        background-color: $hover-color;
+      }
+    }
+
+    .footer-text {
+      margin-top: 20px;
+      font-size: 14px;
+      color: #888;
+
+      a {
+        color: $primary-color;
+        text-decoration: none;
+      }
+    }
+  }
+
+  @media (max-width: 600px) {
+    .login-container {
+      width: 90%; // Adjust width for smaller screens
+      padding: 20px;
+
+      h2 {
+        font-size: 24px; // Smaller heading for mobile
+      }
+
+      .form-group input {
+        font-size: 14px; // Adjust font size for inputs
+      }
+
+      .btn {
+        font-size: 14px;
+      }
+    }
+  }
+}
