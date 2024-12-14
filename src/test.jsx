@@ -2,53 +2,58 @@ import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import "./test.scss";
+import './card.scss'
 
-function Default(){
-  
+export default function Default() {
+  const [show, setShow] = useState(false);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setShow(true);
+    }, 5000); // 3 minutes
+
+    return () => clearTimeout(timer); // Cleanup the timer
+  }, []);
+
+  return !show ? <Content /> : <Test />;
 }
 
-function Content(){
-  return(
-    <div class="birthday-card">
-  <div class="card-content">
-    <h1>Happy Birthday!</h1>
-    <p>Wishing you a day filled with love, laughter, and all your favorite things.</p>
-    <div class="balloons">
-      <div class="balloon red"></div>
-      <div class="balloon blue"></div>
-      <div class="balloon yellow"></div>
+function Content() {
+  return (
+    <div className="birthday-card">
+      <div className="card-content">
+        <h1>Happy Birthday!</h1>
+        <p>Wishing you a day filled with love, laughter, and all your favorite things.</p>
+        <div className="balloons">
+          <div className="balloon red"></div>
+          <div className="balloon blue"></div>
+          <div className="balloon yellow"></div>
+        </div>
+        <div className="party-elements">
+          <div className="confetti"></div>
+          <div className="confetti"></div>
+          <div className="confetti"></div>
+        </div>
+        <button>Celebrate!</button>
+      </div>
     </div>
-    <div class="party-elements">
-      <div class="confetti"></div>
-      <div class="confetti"></div>
-      <div class="confetti"></div>
-    </div>
-    <button>Celebrate!</button>
-  </div>
-</div>
-
-  )
+  );
 }
 
-export default function Test() {
+export function Test() {
   const [selectedItem, setSelectedItem] = useState("கவிதைகள்");
   const [data, setData] = useState([]);
   const [isSidebarVisible, setSidebarVisible] = useState(false);
 
- const handleFetchData = async (type) => {
-    
-    const all = `https://quotes-app-84u8.onrender.com/api/quotes`;
-    let url = `https://quotes-app-84u8.onrender.com/api/get_quote/${type}`;
+  const sidebarRef = useRef(null);
+  const menuBtnRef = useRef(null);
+
+  const handleFetchData = async (type) => {
+    const allUrl = `https://quotes-app-84u8.onrender.com/api/quotes`;
+    const categoryUrl = `https://quotes-app-84u8.onrender.com/api/get_quote/${type}`;
     try {
-      if(type === "கவிதைகள்")
-      {
-      const result = await axios.get(all);
-      setData(result.data);
-      }
-      else{
-        const result = await axios.get(url);
-      setData(result.data);
-      }
+      const response = type === "கவிதைகள்" ? await axios.get(allUrl) : await axios.get(categoryUrl);
+      setData(response.data);
     } catch (error) {
       console.error("Failed to fetch data:", error);
     }
@@ -60,11 +65,9 @@ export default function Test() {
     handleFetchData(item);
     setSidebarVisible(false);
   };
-  const sidebarRef = useRef(null); // Reference for the sidebar
-  const menuBtnRef = useRef(null); // Reference for the menu button
+
   useEffect(() => {
     const handleClickOutside = (e) => {
-      // If the click is outside both the sidebar and the menu button, close the sidebar
       if (
         sidebarRef.current &&
         !sidebarRef.current.contains(e.target) &&
@@ -74,15 +77,13 @@ export default function Test() {
         setSidebarVisible(false);
       }
     };
+    document.body.addEventListener("click", handleClickOutside);
 
-    // Add event listener for document click
-    document.body.addEventListener('click', handleClickOutside);
-
-    // Cleanup the event listener on component unmount
     return () => {
-      document.body.removeEventListener('click', handleClickOutside);
+      document.body.removeEventListener("click", handleClickOutside);
     };
   }, []);
+
   useEffect(() => {
     handleFetchData("கவிதைகள்");
   }, []);
@@ -116,7 +117,6 @@ export default function Test() {
         >
           ☰
         </button>
-        
         <div className="btn-container">
           <Link to="/upload">
             <button className="upload-btn">பதிவேற்றம்</button>
@@ -125,12 +125,9 @@ export default function Test() {
       </div>
       <div className="main-container">
         <div
-          className={`container-left ${
-            isSidebarVisible ? "visible" : "hidden"
-          }`}
+          className={`container-left ${isSidebarVisible ? "visible" : "hidden"}`}
           ref={sidebarRef}
         >
-            <img src="" alt="Logo"/>
           <ul>
             {[
               "என்னவளுக்காக (💖💖)",
@@ -182,7 +179,6 @@ function QuoteList({ data, title }) {
           <p>No quotes available.</p>
         )}
       </div>
-
       {selectedQuote && (
         <FullScreenCard quote={selectedQuote} onClose={handleClose} />
       )}
@@ -190,27 +186,22 @@ function QuoteList({ data, title }) {
   );
 }
 
-// Friend Component
 function FriendComponent() {
   return <div>This is the நண்பன் Component</div>;
 }
 
-// Appa Component
 function AppaComponent() {
-  return <div>This is the Appa Component</div>;
+  return <div>This is the அப்பா Component</div>;
 }
 
-// Amma Component
 function AmmaComponent() {
-  return <div>This is the அம்மா  Component</div>;
+  return <div>This is the அம்மா Component</div>;
 }
 
-// Siblings Component
 function SiblingsComponent() {
   return <div>This is the உடன் பிறந்தவர்கள் Component</div>;
 }
 
-// SmallCard Component
 function SmallCard({ quote, onClick }) {
   return (
     <div className="small-card" onClick={onClick}>
@@ -221,7 +212,6 @@ function SmallCard({ quote, onClick }) {
   );
 }
 
-// FullScreenCard Component
 function FullScreenCard({ quote, onClose }) {
   return (
     <div className="fullscreen-card">
@@ -236,6 +226,3 @@ function FullScreenCard({ quote, onClose }) {
     </div>
   );
 }
-
-
-
