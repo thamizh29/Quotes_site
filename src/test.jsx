@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import "./test.scss";
-import './card.scss'
+import './card.scss';
 
 export default function Default() {
   const [show, setShow] = useState(false);
@@ -10,20 +10,39 @@ export default function Default() {
   useEffect(() => {
     const timer = setTimeout(() => {
       setShow(true);
-    }, 5000); // 3 minutes
+    }, 180000); // 5 seconds
 
     return () => clearTimeout(timer); // Cleanup the timer
   }, []);
 
-  return !show ? <Content /> : <Test />;
+  return !show ? <Content setShow={setShow} /> : <Test setShow={setShow} />;
 }
 
-function Content() {
+function Content({setShow}) {
+  const[data,setdata] = useState("")
+  const GetData = async () => {
+    const url =`https://quotes-app-84u8.onrender.com/api/get_quote/default`
+  try{
+    const result =  axios.get(url)
+    setdata(result.data)
+  }catch(error){
+    console.error(error)
+  }
+  }
+  useEffect(() => {
+    GetData()
+    const timer = setTimeout(() => {
+      setShow(true);
+    }, 180000); // 5 seconds
+
+    return () => clearTimeout(timer); // Cleanup the timer
+  }, []);
+  
   return (
     <div className="birthday-card">
       <div className="card-content">
         <h1>Happy Birthday!</h1>
-        <p>Wishing you a day filled with love, laughter, and all your favorite things.</p>
+        <p>{data}</p>
         <div className="balloons">
           <div className="balloon red"></div>
           <div className="balloon blue"></div>
@@ -34,13 +53,12 @@ function Content() {
           <div className="confetti"></div>
           <div className="confetti"></div>
         </div>
-        <button>Celebrate!</button>
       </div>
     </div>
   );
 }
 
-export function Test() {
+export function Test({ setShow }) {
   const [selectedItem, setSelectedItem] = useState("கவிதைகள்");
   const [data, setData] = useState([]);
   const [isSidebarVisible, setSidebarVisible] = useState(false);
@@ -63,6 +81,12 @@ export function Test() {
     if (selectedItem === item) return;
     setSelectedItem(item);
     handleFetchData(item);
+
+    // If "open" is selected, trigger setShow(true)
+    if (item === "வாழ்த்துக்கள்") {
+      setShow(false);
+    }
+
     setSidebarVisible(false);
   };
 
@@ -128,6 +152,7 @@ export function Test() {
           className={`container-left ${isSidebarVisible ? "visible" : "hidden"}`}
           ref={sidebarRef}
         >
+          <h1 className="logo-txt">SS Quotes</h1>
           <ul>
             {[
               "என்னவளுக்காக (💖💖)",
@@ -137,6 +162,7 @@ export function Test() {
               "அப்பா",
               "அம்மா ",
               "உடன் பிறந்தவர்கள்",
+              "வாழ்த்துக்கள்",
             ].map((item) => (
               <li key={item} onClick={() => handleMenuClick(item)}>
                 {item}

@@ -61,7 +61,7 @@ body {
   .container-left {
     width: 250px;
     background-color:#DFD8EB;
-    color: #DFD8EB;
+    color: #A294F9;
     padding: 1rem;
     box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
 
@@ -137,7 +137,7 @@ body {
 }
 
 .small-card {
-  background-color: #E5D9F2;
+  background-color: hsl(0, 0%, 100%);
   padding: 1rem;
   border-radius: 10px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -152,7 +152,7 @@ body {
 
   h3 {
     margin-bottom: 0.5rem;
-    color: #c9184a;
+    color: #A294F9;
   }
 
   p {
@@ -236,7 +236,7 @@ body {
 
   .form-wrapper {
     margin: auto;
-    width: 100%;
+    width: 80%; // Default width for larger screens
     max-width: 600px;
     background-color: #ffffff;
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
@@ -261,12 +261,14 @@ body {
 
         input,
         select,
-        textarea {
+        textarea,
+        .submit-btn {
           padding: 10px;
           border: 1px solid #ccc;
           border-radius: 5px;
           font-size: 14px;
-          width: 100%;
+          width: 100%; // Ensures all fields take the same width
+          box-sizing: border-box; // Prevents padding from affecting width
 
           &:focus {
             border-color: $primary-color;
@@ -285,9 +287,7 @@ body {
         background-color: $primary-color;
         color: #ffffff;
         border: none;
-        padding: 10px 15px;
         font-size: 16px;
-        border-radius: 5px;
         cursor: pointer;
         transition: background-color 0.3s ease;
 
@@ -296,10 +296,30 @@ body {
         }
       }
     }
+  }
 
-    // Mobile view adjustments
-    @media screen and (max-width: 768px) {
-      margin-top: 50px;
+  // Adjust width for medium screens
+  @media screen and (max-width: 992px) {
+    .form-wrapper {
+      width: 70%;
     }
   }
+
+  // Adjust width for small screens
+  @media screen and (max-width: 768px) {
+    .form-wrapper {
+      width: 90%;
+    }
+  }
+
+  // Adjust width for extra small screens
+  @media screen and (max-width: 480px) {
+    .form-wrapper {
+      width: 90%;
+    
+    }
+  }
+}
+.logo-txt{
+  color: #7E1891;
 }

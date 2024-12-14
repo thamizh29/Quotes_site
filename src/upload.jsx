@@ -17,7 +17,7 @@ export default function Upload() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const url = `http://192.168.1.18:5000/api/upload`;
+    const url = `https://quotes-app-84u8.onrender.com/api/upload`;
     try {
       const result = await axios.post(url, data, {
         headers: {
@@ -25,6 +25,7 @@ export default function Upload() {
         },
       });
       console.log("Response:", result.data);
+      window.alert("upload sucessfully")
     } catch (error) {
       console.error("Error uploading data:", error);
     }
@@ -37,7 +38,7 @@ export default function Upload() {
           <img src="" alt="Logo" />
         </div>
         <div className="btn-container">
-          <Link to="/test-2">
+          <Link to="/">
             <button className="upload-btn">கவிதை</button>
           </Link>
         </div>
