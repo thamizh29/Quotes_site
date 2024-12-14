@@ -30,7 +30,7 @@ const LoginForm = () => {
       });
 
       if (result.data.Status === "success") {
-        navigate('/test'); // Navigate to the /test route after successful login
+        navigate('/quotes'); // Navigate to the /test route after successful login
       }
     } catch (error) {
       console.error("Login failed:", error);

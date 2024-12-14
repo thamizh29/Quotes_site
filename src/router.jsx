@@ -10,9 +10,11 @@ export default function Main() {
   return (
       <Router>
         <Routes>
-          <Route path="/login" element={<LoginForm />}/>
+          <Route path="/">
+          <Route index element={<LoginForm />}/>
           <Route path="/upload" element={<Upload />} />
-          <Route path="/" element={<Default />} />
+          <Route path="/quotes" element={<Default />} />
+          </Route>
         </Routes>
       </Router>
 

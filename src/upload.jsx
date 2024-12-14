@@ -6,6 +6,7 @@ export default function Upload() {
     category: "",
     quote: "",
     author: "",
+    title:"",
   });
 
   const handleChange = (e) => {
@@ -38,7 +39,7 @@ export default function Upload() {
           <img src="" alt="Logo" />
         </div>
         <div className="btn-container">
-          <Link to="/">
+          <Link to="/quotes">
             <button className="upload-btn">கவிதை</button>
           </Link>
         </div>
@@ -49,8 +50,8 @@ export default function Upload() {
             <div className="form-group">
               <label>கவிதை வகைகள்</label>
               <select
-                name="category"
-                value={data.category}
+                name="title"
+                value={data.title}
                 onChange={handleChange}
               >
                 <option value="காதல்">காதல்</option>
@@ -65,7 +66,7 @@ export default function Upload() {
               <label>கவிதை தலைப்பு</label>
               <input
                 name="category"
-                placeholder="love"
+                placeholder="காதல்"
                 type="text"
                 value={data.category}
                 onChange={handleChange}
@@ -76,7 +77,7 @@ export default function Upload() {
               </label>
               <input
                 name="author"
-                placeholder="Author"
+                placeholder="ஆசிரியர்"
                 type="text"
                 value={data.author}
                 onChange={handleChange}
@@ -86,7 +87,9 @@ export default function Upload() {
               <label>கவிதை</label>
               <textarea
                 name="quote"
-                placeholder="கவிதை"
+                placeholder="உயிராக இருப்பவர்களிடம்
+                உரிமையாக இருப்பதை காட்டிலும்
+                உண்மையாக இருப்பது தான் முக்கியம்"
                 value={data.quote}
                 onChange={handleChange}
               />
