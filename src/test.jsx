@@ -10,7 +10,7 @@ export default function Default() {
   useEffect(() => {
     const timer = setTimeout(() => {
       setShow(true);
-    }, 90000); // 5 seconds
+    }, 5000); // 5 seconds
 
     return () => clearTimeout(timer); // Cleanup the timer
   }, []);
@@ -33,7 +33,7 @@ function Content({setShow}) {
     GetData()
     const timer = setTimeout(() => {
       setShow(true);
-    }, 90000); // 5 seconds
+    }, 5000); // 5 seconds
 
     return () => clearTimeout(timer); // Cleanup the timer
   }, []);
@@ -126,15 +126,12 @@ export function Test({ setShow }) {
       case "கவிதைகள்":
       case "என்னவளுக்காக (💖💖)":
       case "காதல்":
-        return <QuoteList data={data} title={selectedItem} />;
-      case "நண்பன்":
-        return <FriendComponent />;
-      case "அப்பா":
-        return <AppaComponent />;
-      case "அம்மா ":
-        return <AmmaComponent />;
       case "உடன் பிறந்தவர்கள்":
-        return <SiblingsComponent />;
+      case "நண்பன்":
+      case "அப்பா":
+      case "அம்மா ":
+      case "மகிழ்ச்சி":
+        return <QuoteList data={data} title={selectedItem} />;
       default:
         return <div>Select an item to display</div>;
     }
@@ -167,6 +164,7 @@ export function Test({ setShow }) {
               "என்னவளுக்காக (💖💖)",
               "கவிதைகள்",
               "காதல்",
+              "மகிழ்ச்சி",
               "நண்பன்",
               "அப்பா",
               "அம்மா ",
@@ -219,22 +217,6 @@ function QuoteList({ data, title }) {
       )}
     </div>
   );
-}
-
-function FriendComponent() {
-  return <div>This is the நண்பன் Component</div>;
-}
-
-function AppaComponent() {
-  return <div>This is the அப்பா Component</div>;
-}
-
-function AmmaComponent() {
-  return <div>This is the அம்மா Component</div>;
-}
-
-function SiblingsComponent() {
-  return <div>This is the உடன் பிறந்தவர்கள் Component</div>;
 }
 
 function SmallCard({ quote, onClick }) {

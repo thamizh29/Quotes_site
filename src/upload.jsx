@@ -59,6 +59,7 @@ export default function Upload() {
                 onChange={handleChange}
               >
                 <option value="காதல்">காதல்</option>
+                <option value="காதல்">மகிழ்ச்சி</option>
                 <option value="நண்பன்">நண்பன்</option>
                 <option value="பார்வை">பார்வை</option>
                 <option value="அம்மா">அம்மா</option>
@@ -70,7 +71,7 @@ export default function Upload() {
               <label>கவிதை தலைப்பு</label>
               <input
                 name="category"
-                placeholder="காதல்"
+                placeholder="கவிதை தலைப்பு"
                 type="text"
                 value={data.category}
                 onChange={handleChange}
@@ -91,9 +92,7 @@ export default function Upload() {
               <label>கவிதை</label>
               <textarea
                 name="quote"
-                placeholder="உயிராக இருப்பவர்களிடம்
-                உரிமையாக இருப்பதை காட்டிலும்
-                உண்மையாக இருப்பது தான் முக்கியம்"
+                placeholder="கவிதை"
                 value={data.quote}
                 onChange={handleChange}
               />
