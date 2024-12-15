@@ -6,10 +6,10 @@ export default function Upload() {
   const navigate = useNavigate();
   const [isload,setisload] = useState(false)
   const [data, setData] = useState({
-    category: "",
+    category: "காதல்",
     quote: "",
     author: "",
-    title:"காதல்",
+    title:"",
   });
 
   const handleChange = (e) => {
@@ -57,8 +57,8 @@ export default function Upload() {
             <div className="form-group">
               <label>கவிதை வகைகள்</label>
               <select
-                name="title"
-                value={data.title}
+                name="category"
+                value={data.category}
                 onChange={handleChange}
               >
                 <option value="காதல்">காதல்</option>
@@ -73,10 +73,10 @@ export default function Upload() {
             <div className="form-group">
               <label>கவிதை தலைப்பு</label>
               <input
-                name="category"
+                name="title"
                 placeholder="கவிதை தலைப்பு"
                 type="text"
-                value={data.category}
+                value={data.title}
                 onChange={handleChange}
               />
             </div>
