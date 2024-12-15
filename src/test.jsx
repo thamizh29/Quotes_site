@@ -10,7 +10,7 @@ export default function Default() {
   useEffect(() => {
     const timer = setTimeout(() => {
       setShow(true);
-    }, 180000); // 5 seconds
+    }, 90000); // 5 seconds
 
     return () => clearTimeout(timer); // Cleanup the timer
   }, []);
@@ -19,12 +19,12 @@ export default function Default() {
 }
 
 function Content({setShow}) {
-  const[data,setdata] = useState("")
+  const[data,setdata] = useState([])
   const GetData = async () => {
     const url =`https://quotes-app-84u8.onrender.com/api/get_quote/default`
   try{
-    const result =  axios.get(url)
-    setdata(result.data)
+    const response = await axios.get(url); // Fetch data from API
+    setdata(response.data)
   }catch(error){
     console.error(error)
   }
@@ -33,7 +33,7 @@ function Content({setShow}) {
     GetData()
     const timer = setTimeout(() => {
       setShow(true);
-    }, 180000); // 5 seconds
+    }, 90000); // 5 seconds
 
     return () => clearTimeout(timer); // Cleanup the timer
   }, []);
@@ -42,7 +42,13 @@ function Content({setShow}) {
     <div className="birthday-card">
       <div className="card-content">
         <h1>Happy Birthday!</h1>
-        <p>{data}</p>
+        {data.length > 0 ? (
+          data.map((item, index) => (
+            <p key={index}>{item.quote}</p> // Return JSX inside map
+          ))
+        ) : (
+          <p>Loading wishe...</p> // Fallback UI
+        )}
         <div className="balloons">
           <div className="balloon red"></div>
           <div className="balloon blue"></div>
