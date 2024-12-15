@@ -9,7 +9,7 @@ export default function Upload() {
     category: "",
     quote: "",
     author: "",
-    title:"",
+    title:"காதல்",
   });
 
   const handleChange = (e) => {
@@ -31,7 +31,7 @@ export default function Upload() {
       });
       console.log("Response:", result.data);
       window.alert("upload sucessfully")
-      navigate('/quote')
+      navigate('/quotes')
     } catch (error) {
       console.error("Error uploading data:", error);
     }finally{
@@ -43,7 +43,7 @@ export default function Upload() {
     <>
       <div className="header-container">
         <div className='image-container'>
-          <img src="" alt="Logo" />
+          
         </div>
         <div className="btn-container">
           <Link to="/quotes">
