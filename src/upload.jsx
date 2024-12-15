@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { Link } from 'react-router';
+import { Link , useNavigate } from 'react-router';
+
 export default function Upload() {
+  const navigate = useNavigate();
   const [isload,setisload] = useState(false)
   const [data, setData] = useState({
     category: "",
@@ -29,6 +31,7 @@ export default function Upload() {
       });
       console.log("Response:", result.data);
       window.alert("upload sucessfully")
+      navigate('/quote')
     } catch (error) {
       console.error("Error uploading data:", error);
     }finally{
@@ -59,7 +62,7 @@ export default function Upload() {
                 onChange={handleChange}
               >
                 <option value="காதல்">காதல்</option>
-                <option value="காதல்">மகிழ்ச்சி</option>
+                <option value="மகிழ்ச்சி">மகிழ்ச்சி</option>
                 <option value="நண்பன்">நண்பன்</option>
                 <option value="பார்வை">பார்வை</option>
                 <option value="அம்மா">அம்மா</option>

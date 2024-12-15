@@ -10,7 +10,7 @@ export default function Default() {
   useEffect(() => {
     const timer = setTimeout(() => {
       setShow(true);
-    }, 90000); // 5 seconds
+    }, 60000); // 5 seconds
 
     return () => clearTimeout(timer); // Cleanup the timer
   }, []);
@@ -33,7 +33,7 @@ function Content({setShow}) {
     GetData()
     const timer = setTimeout(() => {
       setShow(true);
-    }, 90000); // 5 seconds
+    }, 60000); // 5 seconds
 
     return () => clearTimeout(timer); // Cleanup the timer
   }, []);
@@ -60,6 +60,7 @@ function Content({setShow}) {
           <div className="confetti"></div>
           <div className="confetti"></div>
         </div>
+        <button onClick={(e)=> setShow(true)}>watch later</button>
       </div>
     </div>
     </div>
