@@ -10,7 +10,7 @@ export default function Default() {
   useEffect(() => {
     const timer = setTimeout(() => {
       setShow(true);
-    }, 5000); // 5 seconds
+    }, 90000); // 5 seconds
 
     return () => clearTimeout(timer); // Cleanup the timer
   }, []);
@@ -33,7 +33,7 @@ function Content({setShow}) {
     GetData()
     const timer = setTimeout(() => {
       setShow(true);
-    }, 5000); // 5 seconds
+    }, 90000); // 5 seconds
 
     return () => clearTimeout(timer); // Cleanup the timer
   }, []);
