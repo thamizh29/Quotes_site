@@ -1,12 +1,11 @@
-body {
-  margin: 0;
-  padding: 0;
+.parent-container {
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 100vh;
-  background: linear-gradient(to bottom, #f7f7f7, #eaeaea); /* Optional background */
-  font-family: Arial, sans-serif;
+  min-height: 100vh; // Full viewport height
+  margin: 0;
+  padding: 0;
+  background: linear-gradient(to bottom, #f7f7f7, #eaeaea); // Optional background
 }
 
 .birthday-card {

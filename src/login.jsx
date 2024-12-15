@@ -5,6 +5,7 @@ import axios from 'axios';
 
 const LoginForm = () => {
   const navigate = useNavigate();
+  const [isload,setisload] = useState(false)
   const [data, setData] = useState({
     username: "",
     password: "",
@@ -22,6 +23,7 @@ const LoginForm = () => {
     const url = `https://quotes-app-84u8.onrender.com/api/login`;
 
     try {
+      setisload(true)
       // Change the request method from GET to POST
       const result = await axios.post(url, data, {
         headers: {
@@ -34,6 +36,9 @@ const LoginForm = () => {
       }
     } catch (error) {
       console.error("Login failed:", error);
+    }
+    finally{
+      setisload(false)
     }
   };
 
@@ -65,8 +70,11 @@ const LoginForm = () => {
             required
           />
         </div>
-
-        <button type="submit" className="btn">Login</button>
+        {!isload ? (
+        <button type="submit" className="btn">Login</button>)
+        :
+        (<div class="spinner"></div>)
+        }
       </form>
     </div>
     </div>

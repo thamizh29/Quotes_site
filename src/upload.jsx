@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router';
 export default function Upload() {
+  const [isload,setisload] = useState(false)
   const [data, setData] = useState({
     category: "",
     quote: "",
@@ -20,6 +21,7 @@ export default function Upload() {
     e.preventDefault();
     const url = `https://quotes-app-84u8.onrender.com/api/upload`;
     try {
+      setisload(true)
       const result = await axios.post(url, data, {
         headers: {
           "Content-Type": "application/json",
@@ -29,6 +31,8 @@ export default function Upload() {
       window.alert("upload sucessfully")
     } catch (error) {
       console.error("Error uploading data:", error);
+    }finally{
+      setisload(false)
     }
   };
 
@@ -94,7 +98,11 @@ export default function Upload() {
                 onChange={handleChange}
               />
             </div>
-            <button type="submit" className="submit-btn">பதிவேற்றம்</button>
+            {!isload ? (
+            <button type="submit" className="submit-btn">பதிவேற்றம்</button>)
+              :
+            (<div class="spinner"></div>)
+          }
           </form>
         </div>
       </div>

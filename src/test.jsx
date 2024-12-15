@@ -39,6 +39,7 @@ function Content({setShow}) {
   }, []);
   
   return (
+    <div className="parent-container"> 
     <div className="birthday-card">
       <div className="card-content">
         <h1>Happy Birthday!</h1>
@@ -61,8 +62,10 @@ function Content({setShow}) {
         </div>
       </div>
     </div>
+    </div>
   );
 }
+
 
 export function Test({ setShow }) {
   const [selectedItem, setSelectedItem] = useState("கவிதைகள்");
